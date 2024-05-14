@@ -45,3 +45,4 @@ For collaborations or inquiries, please contact Emmanuel Odenyire Anyira via:
 
 You can contact Austin through:
 - LinkedIn: [Austin Ng'ang'a](https://www.linkedin.com/in/austin-nganga/)
+- Email: trigger_austin00@proton.me

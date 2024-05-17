@@ -43,5 +43,5 @@ class BaseModel:
 
     def _import_storage(self):
         """imports storage only when needed to prevent circular import error"""
-        from models import storagei
+        from models import storage
         return storage

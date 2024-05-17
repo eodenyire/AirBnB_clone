@@ -3,6 +3,9 @@ import json
 from models.base_model import BaseModel
 
 class FileStorage:
+    classes = {
+	'BaseModel':BaseModel
+	}
     """defines a class fileStorage
 
         Attributes:

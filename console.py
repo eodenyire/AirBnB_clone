@@ -4,6 +4,10 @@ from models.base_model import BaseModel
 from models import storage
 
 class HBNBCommand(cmd.Cmd):
+    classes = {
+	'BaseModel': BaseModel 
+	}
+
     prompt = '(hbnb) '
 
     def do_quit(self, arg):
@@ -55,7 +59,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        if args[0] not in storage.classes():
+        if args[0] not in storage.classes:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -70,13 +74,19 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """Prints all string representation of all instances based or not on the class name"""
-        if not arg:
-            print([str(obj) for obj in storage.all().values()])
+        args = arg.split()
+        if not args:
+            print([str(obj) for obj in storage.all()])
             return
-        if arg not in storage.classes():
+            
+        if args[0] not in storage.classes:
             print("** class doesn't exist **")
             return
-        print([str(obj) for obj in storage.all().values() if type(obj).__name__ == arg])
+        print([str(storage.all()[obj]) for obj in storage.all() if str(obj.split(".")[0]) == args[0]])
+        
+	#for obj in storage.all():
+         #   if obj.split(".")[0] == args[0]:
+          #      print(str(storage.all()[obj]))
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id by adding or updating attribute"""

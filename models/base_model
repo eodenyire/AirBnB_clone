@@ -36,6 +36,7 @@ class BaseModel:
         """updates updated_at with current time"""
         self.updated_at = datetime.now()
         self._import_storage().save()  # call to save method in file_storage
+        self._import_storage().new(self)
 
     def to_dict(self):
         """

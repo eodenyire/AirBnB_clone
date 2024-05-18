@@ -2,9 +2,10 @@
 import uuid
 from datetime import datetime
 
+
 class BaseModel:
     """Defines all common attributes and methods for all other classes"""
-    
+
     def __init__(self, *args, **kwargs):
         """Initializes an instance of BaseModel"""
         if kwargs:
@@ -26,7 +27,9 @@ class BaseModel:
         return f"[{class_name}] ({self.id}) {self.__dict__}"
 
     def save(self):
-        """Updates `updated_at` with the current datetime and saves the instance"""
+        """
+            Updates updated_at with the current datetime and saves the instance
+        """
         self.updated_at = datetime.now()
         from models import storage
         storage.new(self)

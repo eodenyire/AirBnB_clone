@@ -11,10 +11,8 @@ class BaseModel:
                 if key != '__class__':
                     if key in ('created_at', 'updated_at'):#get only created_at or updated_at keys
                         setattr(self, key, datetime.fromisoformat(value))#convert time string to time obj
-                        print(key)
                     else:
                         setattr(self, key, value)
-                        print(key)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()

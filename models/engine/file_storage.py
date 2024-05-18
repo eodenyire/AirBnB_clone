@@ -1,63 +1,65 @@
 #!/usr/bin/python3
-"""A storage module."""
 import json
+from models.base_model import BaseModel
+from models.user import User
+from models.review import Review
+from models.city import City
+from models.amenity import Amenity
+from models.state import State
+from models.place import Place
 
 
 class FileStorage:
-    """A class that serializes instances to a JSON file and deserializes
-    JSON file to instances.
+    """defines a class fileStorage
+
+        Attributes:
+            __file_path: path of json file containing a class dict rep
+            __objects: stores all obects in file_path
     """
-    # Class variables to hold file path and objects
-    __file_path = "file.json"  # Path to the JSON file
-    __objects = {}  # Dictionary to store objects
+    classes = {
+        "BaseModel": BaseModel,
+        "User": User,
+        "Review": Review,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Place": Place
+    }
+
+    def __init__(self):
+        """class attributes initialized"""
+        self.__file_path = 'file.json'  # path to json file
+        self.__objects = {}  # empty dictionary
 
     def all(self):
-        """Return the dictionary __objects."""
-        return __class__.__objects
+        """returns the object __object"""
+        return self.__objects
 
     def new(self, obj):
-        """Set in __objects the obj with key <obj class name>.id."""
-        key = obj.__class__.__name__ + "." + obj.id
-        __class__.__objects[key] = obj
+        """sets in __objects the obj with key <obj classname>.id"""
+        if(not isinstance(obj, object)):
+            print("must be an object")
+            return
+        self.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
 
     def save(self):
-        """Serialize __objects to the JSON file (path: __file_path)."""
-        dict_objs = {}
-        for key in __class__.__objects:
-            dict_objs[key] = __class__.__objects[key].to_dict()
-        with open(__class__.__file_path, "w") as wr:
-            json.dump(dict_objs, wr)
+        """serializes __objects to the JSON file (path: __file_path)"""
+        obj_dict = {}
+        for key, obj in self.__objects.items():  # get obj from __objects
+            obj_dict[key] = obj.to_dict()  # serialize and store in obj_dict
+        with open(self.__file_path, 'w')as file:
+            json.dump(obj_dict, file)  # write contents to file
 
     def reload(self):
-        """Deserialize the JSON file to __objects, only if the
-        JSON file (__file_path) exists; otherwise, do nothing.
-        If the file doesn’t exist, no exception is raised.
-        """
+        """"deserializes the JSON file to __objects if filepath exists"""
         try:
-            with open(__class__.__file_path) as rd:
-                from models.base_model import BaseModel
-                from models.user import User
-                from models.state import State
-                from models.city import City
-                from models.amenity import Amenity
-                from models.place import Place
-                from models.review import Review
-                dict_objs = json.load(rd)
-                # Deserialize objects based on class name
-                for key in dict_objs:
-                    if key.split(".")[0] == 'BaseModel':
-                        __class__.__objects[key] = BaseModel(**dict_objs[key])
-                    elif key.split(".")[0] == 'User':
-                        __class__.__objects[key] = User(**dict_objs[key])
-                    elif key.split(".")[0] == 'State':
-                        __class__.__objects[key] = State(**dict_objs[key])
-                    elif key.split(".")[0] == 'City':
-                        __class__.__objects[key] = City(**dict_objs[key])
-                    elif key.split(".")[0] == 'Amenity':
-                        __class__.__objects[key] = Amenity(**dict_objs[key])
-                    elif key.split(".")[0] == 'Place':
-                        __class__.__objects[key] = Place(**dict_objs[key])
-                    elif key.split(".")[0] == 'Review':
-                        __class__.__objects[key] = Review(**dict_objs[key])
+            with open(self.__file_path, 'r')as file:
+                json_obj = json.load(file)
+                for key in json_obj:
+                    cls_name = json_obj[key]["__class__"]
+                    self.__objects[key] = eval(cls_name)(**json_obj[key])
         except FileNotFoundError:
             pass
+
+    def get_attr_name_from_classes(self, key):
+        return self.classes.get(key)

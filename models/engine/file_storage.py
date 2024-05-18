@@ -1,6 +1,12 @@
 #!/usr/bin/python3
 import json
 from models.base_model import BaseModel
+from models.user import User
+from models.review import Review
+from models.city import City
+from models.amenity import Amenity
+from models.state import State
+from models.place import Place
 
 class FileStorage:
     classes = {
@@ -12,6 +18,15 @@ class FileStorage:
             __file_path: path of json file containing a class dict representation
             __objects: stores all obects in file_path
     """
+    classes = {
+        "BaseModel":BaseModel,
+        "User":User,
+        "Review": Review,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Place": Place
+    }
     def __init__(self):
         """class attributes initialized"""
         self.__file_path = 'file.json'#path to json file
@@ -38,10 +53,10 @@ class FileStorage:
         try:
             with open(self.__file_path, 'r')as file:
                 deserialized_obj = json.load(file)
-                for key, value in deserialized_obj.items():
-                    cls_name = value['__class__']
-                    cls = globals()[cls_name]
-                    self.__objects[key] = cls(**value)
+                for key in deserialized_obj:
+                    cls_name = deserialized_obj[key]["__class__"]
+                    self.__objects[key] = eval(cls_name)(**deserialized_obj[key])
         except FileNotFoundError:
             pass
-
+    def get_attr_name_from_classes(self, key):
+        return self.classes.get(key)

@@ -17,7 +17,7 @@ git clone https://github.com/eodenyire/AirBnB_clone.git
 
 cd AirBnB_clone
 
-3. Start the command interpreter by running the 'console.py' script.
+3. Start the  command interpreter by running the 'console.py' script.
 
 python3 console.py
 

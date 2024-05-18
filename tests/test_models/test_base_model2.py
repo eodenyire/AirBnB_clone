@@ -1,28 +1,9 @@
 import unittest
-from datetime import datetime
 from models.base_model import BaseModel
-import models
+from models import storage
+from datetime import datetime
 
 class TestBaseModel(unittest.TestCase):
-    def test_save_updates_updated_at(self):
-        # Create an instance of BaseModel
-        my_model = BaseModel()
-
-        # Get the initial updated_at value
-        initial_updated_at = my_model.updated_at
-
-        # Call the save method
-        my_model.save()
-
-        # Get the updated updated_at value
-        updated_updated_at = my_model.updated_at
-
-        # Assert that the updated_at value has changed
-        self.assertNotEqual(initial_updated_at, updated_updated_at)
-
-        # Assert that the updated_updated_at is a datetime object
-        self.assertIsInstance(updated_updated_at, datetime)
-
     def test_create_base_model_from_dict(self):
         # Create a dictionary representation of a BaseModel instance
         my_model_json = {
@@ -51,5 +32,24 @@ class TestBaseModel(unittest.TestCase):
         # Check if the updated_at attribute is a datetime object
         self.assertIsInstance(my_new_model.updated_at, datetime)
 
+    def test_link_to_file_storage(self):
+        # Create an instance of BaseModel
+        my_model = BaseModel()
+
+        # Ensure that the storage variable is properly linked
+        self.assertEqual(storage.all()["BaseModel." + my_model.id], my_model)
+        
+        # Call the save method
+        my_model.save()
+
+        # Ensure that the save method of storage is called
+        self.assertTrue(storage.all())
+        
+        # Create a new BaseModel instance
+        my_new_model = BaseModel()
+        
+        # Ensure that new() method of storage is called for a new instance
+        self.assertIn("BaseModel." + my_new_model.id, storage.all())
+        
 if __name__ == '__main__':
     unittest.main()

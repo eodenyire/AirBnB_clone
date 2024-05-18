@@ -1,7 +1,6 @@
 import unittest
 from datetime import datetime
 from models.base_model import BaseModel
-import models
 
 class TestBaseModel(unittest.TestCase):
     def test_save_updates_updated_at(self):
@@ -51,5 +50,34 @@ class TestBaseModel(unittest.TestCase):
         # Check if the updated_at attribute is a datetime object
         self.assertIsInstance(my_new_model.updated_at, datetime)
 
+    def test_init_method(self):
+        # Test the __init__ method of BaseModel
+        my_model = BaseModel()
+        self.assertIsInstance(my_model, BaseModel)
+        self.assertIsInstance(my_model.id, str)
+        self.assertIsInstance(my_model.created_at, datetime)
+        self.assertIsInstance(my_model.updated_at, datetime)
+
+    def test_to_dict_method(self):
+        # Test the to_dict method of BaseModel
+        my_model = BaseModel()
+        my_model_dict = my_model.to_dict()
+        self.assertIsInstance(my_model_dict, dict)
+        self.assertIn('id', my_model_dict)
+        self.assertIn('created_at', my_model_dict)
+        self.assertIn('updated_at', my_model_dict)
+        self.assertEqual(my_model_dict['id'], my_model.id)
+        self.assertEqual(my_model_dict['__class__'], 'BaseModel')
+        self.assertIsInstance(my_model_dict['created_at'], str)
+        self.assertIsInstance(my_model_dict['updated_at'], str)
+
+    def test_str_method(self):
+        # Test the __str__ method of BaseModel
+        my_model = BaseModel()
+        my_model_str = str(my_model)
+        expected_str = f"[BaseModel] ({my_model.id}) {my_model.__dict__}"
+        self.assertEqual(my_model_str, expected_str)
+
 if __name__ == '__main__':
     unittest.main()
+

@@ -25,7 +25,6 @@ class BaseModel:
         """Returns a string representation of the instance"""
         class_name = self.__class__.__name__
         string_value = f"[{class_name}] ({self.id}) {self.__dict__}"
-        print(string_value)
         return string_value
 
     def save(self):

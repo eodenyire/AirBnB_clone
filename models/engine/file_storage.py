@@ -10,9 +10,6 @@ from models.place import Place
 
 
 class FileStorage:
-    classes = {
-        'BaseModel': BaseModel
-    }
     """defines a class fileStorage
 
         Attributes:
@@ -40,9 +37,6 @@ class FileStorage:
 
     def new(self, obj):
         """sets in __objects the obj with key <obj classname>.id"""
-        if (not isinstance(obj, object)):
-            print("must be an object")
-            return
         self.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
 
     def save(self):
@@ -58,9 +52,11 @@ class FileStorage:
         try:
             with open(self.__file_path, 'r')as file:
                 json_obj = json.load(file)
-                for key in json_obj:
-                    cls_name = json_obj[key]["__class__"]
-                    self.__objects[key] = eval(cls_name)(**json_obj[key])
+                for key, value in json_obj.items:
+                    cls_name, objId = key.split('.')
+                    if cls_name in self.classes:
+                        cls = self.classes[cls_name]
+                        self.__objects[key] = cls_name(**value)
         except FileNotFoundError:
             pass
 

@@ -100,43 +100,55 @@ class HBNBCommand(cmd.Cmd):
               for obj in storage.all().values() if type(obj).__name__ == arg])
 
     def do_update(self, arg):
-        args = shlex.split(arg)
-        if len(args) < 1:
+        """
+            Updates an instance based on the class name and
+            id by adding or updating attribute
+        """
+        args = arg.split()
+        if not args:
             print("** class name missing **")
             return
-        class_name = args[0]
-        if class_name not in storage.classes():
+        if args[0] not in storage.classes:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
             print("** instance id missing **")
             return
-        instance_id = args[1]
-        key = f"{class_name}.{instance_id}"
+        key = args[0] + '.' + args[1]
         if key not in storage.all():
             print("** no instance found **")
             return
-        if len(args) == 3 and re.match(r"^\{.*\}$", args[2]):
-            attributes = eval(args[2])
-            if not isinstance(attributes, dict):
-                print("** attribute name missing **")
-                return
-            obj = storage.all()[key]
-            for attr_name, attr_value in attributes.items():
-                setattr(obj, attr_name, attr_value)
-            obj.save()
-            return
-        if len(args) < 3:
+
+        if len(args) == 3:
             print("** attribute name missing **")
             return
-        attr_name = args[2]
-        if len(args) < 4:
+        elif len(args) == 4:
             print("** value missing **")
             return
-        attr_value = args[3]
-        obj = storage.all()[key]
-        setattr(obj, attr_name, attr_value)
-        obj.save()
+        else:
+            obj = storage.all()[key]
+            if '{' in arg and '}' in arg:
+                import ast
+                attr_dict = ast.literal_eval(' '.join(args[2:]))
+                if isinstance(attr_dict, dict):
+                    for attr_name, attr_value in attr_dict.items():
+                        if hasattr(obj, attr_name):
+                            attr_type = type(getattr(obj, attr_name))
+                            setattr(obj, attr_name, attr_type(attr_value))
+                        else:
+                            setattr(obj, attr_name, attr_value)
+                else:
+                    print("** invalid dictionary **")
+                    return
+            else:
+                attr_name = args[2]
+                attr_value = args[3].strip('"')
+                if hasattr(obj, attr_name):
+                    attr_type = type(getattr(obj, attr_name))
+                    setattr(obj, attr_name, attr_type(attr_value))
+                else:
+                    setattr(obj, attr_name, attr_value)
+            obj.save()
 
     def do_count(self, arg):
         """

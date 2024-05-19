@@ -52,7 +52,7 @@ class FileStorage:
         try:
             with open(self.__file_path, 'r')as file:
                 json_obj = json.load(file)
-                for key, value in json_obj.items:
+                for key, value in json_obj.items():
                     cls_name, objId = key.split('.')
                     if cls_name in self.classes:
                         cls = self.classes[cls_name]

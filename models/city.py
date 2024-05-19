@@ -10,3 +10,12 @@ class City(BaseModel):
     """
     state_id = ""
     name = ""
+    
+    def __init__(self):
+        """
+            initializes a class City
+
+            Attributes:
+                *args, **kwargs
+        """
+        super().__init__(*args, **kwargs)

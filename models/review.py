@@ -13,3 +13,12 @@ class Review(BaseModel):
     place_id = ""
     user_id = ""
     text = ""
+
+    def __init__(self):
+        """
+            Initializes a class Review
+
+            Attributes:
+                *args, **kwargs
+        """
+        super().__init__(*args, **kwargs)

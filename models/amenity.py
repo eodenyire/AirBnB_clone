@@ -8,6 +8,7 @@ class Amenity(BaseModel):
                 name = empty string
     """
     name = ""
+
     def __init__(self, *args, **kwargs):
         """
             initializes a new Amenity class

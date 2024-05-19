@@ -2,6 +2,8 @@ import unittest
 from datetime import datetime
 from models.base_model import BaseModel
 import models
+from io import StringIO
+
 
 class TestBaseModel(unittest.TestCase):
     def test_save_updates_updated_at(self):
@@ -50,6 +52,40 @@ class TestBaseModel(unittest.TestCase):
 
         # Check if the updated_at attribute is a datetime object
         self.assertIsInstance(my_new_model.updated_at, datetime)
+
+    def test_str_base_model(self):
+        # test the printing of string representation of class
+        my_model = BaseModel()
+        my_model.name = 'my first model'
+        my_model.number = 98
+        created_at = my_model.created_at.isoformat()
+        updated_at = my_model.updated_at.isoformat()
+        expected_output = f"
+        [BaseModel]({my_model.id})
+        {{'id': '{my_model.id}',
+            'created_at':
+            datetime.datetime({my_model.created_at.year},
+                              {my_model.created_at.month},
+                              {my_model.created_at.day},
+                              {my_model.created_at.hour},
+                              {my_model.created_at.minute},
+                              {my_model.created_at.second},
+                              {my_model.created_at.microsecond}),
+            'updated_at':
+            datetime.datetime({my_model.updated_at.year},
+                              {my_model.updated_at.month},
+                              {my_model.updated_at.day},
+                              {my_model.update_at.hour},
+                              {my_model.updated_at.minute},
+                              {my_model.updated_at.second},
+                              {my_model.updated_at.microsecond}),
+            'name': 'my first model', 'number': '98'}}"
+        with patch('sys.stdout', new=StringIO()) as f:
+            print(my_model)
+            output = f.getvalue()
+
+        self.assertEqual(output, expected_output)
+
 
 if __name__ == '__main__':
     unittest.main()

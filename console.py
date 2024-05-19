@@ -96,7 +96,8 @@ class HBNBCommand(cmd.Cmd):
         if arg not in storage.classes:
             print("** class doesn't exist **")
             return
-        print([str(obj) for obj in storage.all().values() if type(obj).__name__ == arg])
+        print([str(obj)
+              for obj in storage.all().values() if type(obj).__name__ == arg])
 
     def do_update(self, arg):
         """

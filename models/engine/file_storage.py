@@ -11,8 +11,8 @@ from models.place import Place
 
 class FileStorage:
     classes = {
-	'BaseModel':BaseModel
-	}
+        'BaseModel': BaseModel
+    }
     """defines a class fileStorage
 
         Attributes:
@@ -40,7 +40,7 @@ class FileStorage:
 
     def new(self, obj):
         """sets in __objects the obj with key <obj classname>.id"""
-        if(not isinstance(obj, object)):
+        if (not isinstance(obj, object)):
             print("must be an object")
             return
         self.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj

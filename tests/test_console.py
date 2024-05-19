@@ -44,7 +44,7 @@ class TestHBNBCommand(unittest.TestCase):
             self.console.onecmd("create User")
             output = f.getvalue().strip()
             self.assertTrue(len(output) > 0)
-            self.assertTrue(output in storage.all().keys())
+            self.assertTrue(f"User.{output}" in storage.all().keys())
 
     def test_show_missing_class(self):
         with patch('sys.stdout', new=StringIO()) as f:
@@ -142,17 +142,21 @@ class TestHBNBCommand(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             self.console.onecmd("create User")
             user_id = f.getvalue().strip()
+            f.truncate(0)
+            f.seek(0)
             self.console.onecmd(f"update User {user_id}")
-            self.assertEqual(
-                f.getvalue().strip(),
+            self.assertEqual(f.getvalue().strip(),
                 "** attribute name missing **")
 
     def test_update_missing_attr_value(self):
         with patch('sys.stdout', new=StringIO()) as f:
             self.console.onecmd("create User")
             user_id = f.getvalue().strip()
+            f.truncate(0)
+            f.seek(0)
             self.console.onecmd(f"update User {user_id} first_name")
-            self.assertEqual(f.getvalue().strip(), "** value missing **")
+            output = f.getvalue().strip()
+            self.assertEqual(output, "** value missing **")
 
     def test_update_valid(self):
         with patch('sys.stdout', new=StringIO()) as f:
@@ -182,10 +186,11 @@ class TestHBNBCommand(unittest.TestCase):
     def test_count_valid_class(self):
         with patch('sys.stdout', new=StringIO()) as f:
             self.console.onecmd("create User")
+            f.truncate(0)
+            f.seek(0)
             self.console.onecmd("User.count()")
             output = f.getvalue().strip()
             self.assertEqual(output, "1")
-
 
 if __name__ == '__main__':
     unittest.main()

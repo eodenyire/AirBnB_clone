@@ -118,21 +118,82 @@ class HBNBCommand(cmd.Cmd):
         if key not in storage.all():
             print("** no instance found **")
             return
-        if len(args) < 3:
+
+        if len(args) == 3:
             print("** attribute name missing **")
             return
-        if len(args) < 4:
+        elif len(args) == 4:
             print("** value missing **")
             return
-        obj = storage.all()[key]
-        attr_name = args[2]
-        attr_value = args[3].strip('"')
-        if hasattr(obj, attr_name):
-            attr_type = type(getattr(obj, attr_name))
-            setattr(obj, attr_name, attr_type(attr_value))
         else:
-            setattr(obj, attr_name, attr_value)
-        obj.save()
+            obj = storage.all()[key]
+            if '{' in arg and '}' in arg:
+                import ast
+                attr_dict = ast.literal_eval(' '.join(args[2:]))
+                if isinstance(attr_dict, dict):
+                    for attr_name, attr_value in attr_dict.items():
+                        if hasattr(obj, attr_name):
+                            attr_type = type(getattr(obj, attr_name))
+                            setattr(obj, attr_name, attr_type(attr_value))
+                        else:
+                            setattr(obj, attr_name, attr_value)
+                else:
+                    print("** invalid dictionary **")
+                    return
+            else:
+                attr_name = args[2]
+                attr_value = args[3].strip('"')
+                if hasattr(obj, attr_name):
+                    attr_type = type(getattr(obj, attr_name))
+                    setattr(obj, attr_name, attr_type(attr_value))
+                else:
+                    setattr(obj, attr_name, attr_value)
+            obj.save()
+
+    def do_count(self, arg):
+        """
+            Retrieve the number of instances of a class
+        """
+        if not arg:
+            print("** class name missing **")
+            return
+        if arg not in storage.classes:
+            print("** class doesn't exist **")
+            return
+        count = sum(1 for obj in storage.all().values()
+                    if type(obj).__name__ == arg)
+        print(count)
+
+    def default(self, line):
+        """Default method to handle custom commands"""
+        args = line.split('.')
+        if len(args) >= 2:
+            class_name = args[0]
+            command = args[1]
+            if command == "all()":
+                self.do_all(class_name)
+            elif command == "count()":
+                self.do_count(class_name)
+            elif command.startswith("show"):
+                id = command[5:-1].strip('"')
+                self.do_show(f"{class_name} {id}")
+            elif command.startswith("destroy"):
+                id = command[8:-1].strip('"')
+                self.do_destroy(f"{class_name} {id}")
+            elif command.startswith("update"):
+                args = command[7:-1].split(', ')
+                if len(args) == 2:
+                    id = args[0].strip('"')
+                    dict_rep = eval(args[1])
+                    self.do_update(f"{class_name} {id} {dict_rep}")
+                elif len(args) == 3:
+                    id = args[0].strip('"')
+                    attr_name = args[1].strip('"')
+                    attr_value = args[2].strip('"')
+                    self.do_update(
+                        f"{class_name} {id} {attr_name} {attr_value}")
+        else:
+            super().default(line)
 
 
 if __name__ == '__main__':

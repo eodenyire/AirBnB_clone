@@ -15,4 +15,4 @@ class Amenity(BaseModel):
             Attribute:
                 *args, **kwargs
         """
-        super.__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)

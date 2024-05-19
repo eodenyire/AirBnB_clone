@@ -11,14 +11,36 @@ from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
+    """
+        Custom comand interpreter for HBNB command
+
+        Attributes:
+            prompt (str): command prompt
+            classes (dict): Dictionary of available classes
+    """
     prompt = '(hbnb) '
 
     def do_quit(self, arg):
-        """Quit command to exit the program"""
+        """
+            Quit command to exit the program
+
+            Args:
+                arg(str): command argument
+
+            Returns:
+                bool: true to exit program
+        """
         return True
 
     def do_EOF(self, arg):
-        """EOF command to exit the program"""
+        """
+            EOF command to exit the program(ctrl + D)
+
+            Args:
+                arg (str): command argument
+            Returns:
+                bool: true to exit program
+        """
         print()  # To ensure a new line after EOF is entered
         return True
 
@@ -119,10 +141,10 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
             return
 
-        if len(args) == 3:
+        if len(args) < 3:
             print("** attribute name missing **")
             return
-        elif len(args) == 4:
+        elif len(args) < 4:
             print("** value missing **")
             return
         else:
@@ -143,6 +165,9 @@ class HBNBCommand(cmd.Cmd):
             else:
                 attr_name = args[2]
                 attr_value = args[3].strip('"')
+                if attr_name in ('id', 'created_at', 'updated_at'):
+                    print(f"** can not update attribute: {attr_name} **")
+                    return
                 if hasattr(obj, attr_name):
                     attr_type = type(getattr(obj, attr_name))
                     setattr(obj, attr_name, attr_type(attr_value))
@@ -165,7 +190,10 @@ class HBNBCommand(cmd.Cmd):
         print(count)
 
     def default(self, line):
-        """Default method to handle custom commands"""
+        """
+            Default method to handle custom commands
+
+        """
         args = line.split('.')
         if len(args) >= 2:
             class_name = args[0]

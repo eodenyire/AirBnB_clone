@@ -66,5 +66,12 @@ class TestFileStorage(unittest.TestCase):
         self.assertIn("BaseModel." + model1.id, all_objs)
         self.assertIn("BaseModel." + model2.id, all_objs)
 
+    def test_get_classes(self):
+        #test get_classes_attr_name method
+        value_check = 'User'
+        value = self.storage.get_attr_name_from_classes(value_check)
+        self.assertEqual(value.__name__, value_check)
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+"""
+Command interpreter for the AirBnB clone project, allowing CRUD operations and
+management of storage through a CLI. Supports commands such as create, show,
+destroy, update, and more.
+"""
 import cmd
 from models.base_model import BaseModel
 from models.user import User

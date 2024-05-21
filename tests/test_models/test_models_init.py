@@ -3,6 +3,7 @@ from unittest.mock import patch
 from models import storage
 from models.engine.file_storage import FileStorage
 
+
 class TestInitFile(unittest.TestCase):
 
     # Test if FileStorage is imported correctly
@@ -18,6 +19,7 @@ class TestInitFile(unittest.TestCase):
     def test_reload_called(self, mock_reload):
         storage.reload()
         self.assertTrue(mock_reload.called)
+
 
 if __name__ == '__main__':
     unittest.main()

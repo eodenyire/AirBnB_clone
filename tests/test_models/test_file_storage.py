@@ -3,6 +3,7 @@ import os
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 
+
 class TestFileStorage(unittest.TestCase):
 
     def setUp(self):
@@ -28,7 +29,8 @@ class TestFileStorage(unittest.TestCase):
         self.assertIn("BaseModel." + model2.id, all_objs)
 
     def test_new_method(self):
-        # Test if new() properly sets an object in __objects with the correct key
+        # Test if new() properly sets an object
+        # in __objects with the correct key
         # Create an object and add it using new()
         model = BaseModel()
         self.storage.new(model)
@@ -67,7 +69,7 @@ class TestFileStorage(unittest.TestCase):
         self.assertIn("BaseModel." + model2.id, all_objs)
 
     def test_get_classes(self):
-        #test get_classes_attr_name method
+        # test get_classes_attr_name method
         value_check = 'User'
         value = self.storage.get_attr_name_from_classes(value_check)
         self.assertEqual(value.__name__, value_check)

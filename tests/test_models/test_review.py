@@ -7,7 +7,7 @@ from datetime import datetime
 import inspect
 from models import review
 from models.base_model import BaseModel
-import pycodestyle 
+import pycodestyle
 import unittest
 Review = review.Review
 
@@ -26,8 +26,10 @@ class TestReviewDocs(unittest.TestCase):
         self.assertTrue(len(Review.__doc__) >= 1,
                         "Review class needs a docstring")
 
+
 class TestReview(unittest.TestCase):
     """Test the Review class"""
+
     def test_is_subclass(self):
         """Test that Review is a subclass of BaseModel"""
         review = Review()

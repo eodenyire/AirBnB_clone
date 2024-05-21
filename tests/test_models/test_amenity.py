@@ -33,8 +33,10 @@ class TestAmenityDocs(unittest.TestCase):
         self.assertTrue(len(Amenity.__doc__) >= 1,
                         "Amenity class needs a docstring")
 
+
 class TestAmenity(unittest.TestCase):
     """Test the Amenity class"""
+
     def test_is_subclass(self):
         """Test that Amenity is a subclass of BaseModel"""
         amenity = Amenity()

@@ -2,6 +2,7 @@ import unittest
 from datetime import datetime
 from models.base_model import BaseModel
 
+
 class TestBaseModel(unittest.TestCase):
     def test_save_updates_updated_at(self):
         # Create an instance of BaseModel
@@ -78,6 +79,6 @@ class TestBaseModel(unittest.TestCase):
         expected_str = f"[BaseModel] ({my_model.id}) {my_model.__dict__}"
         self.assertEqual(my_model_str, expected_str)
 
+
 if __name__ == '__main__':
     unittest.main()
-

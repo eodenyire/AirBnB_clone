@@ -33,8 +33,10 @@ class TestStateDocs(unittest.TestCase):
         self.assertTrue(len(State.__doc__) >= 1,
                         "State class needs a docstring")
 
+
 class TestState(unittest.TestCase):
     """Test the State class"""
+
     def test_is_subclass(self):
         """Test that State is a subclass of BaseModel"""
         state = State()
@@ -74,4 +76,3 @@ class TestState(unittest.TestCase):
         state = State()
         string = "[State] ({}) {}".format(state.id, state.__dict__)
         self.assertEqual(string, str(state))
-

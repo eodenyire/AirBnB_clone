@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import unittest
 from unittest.mock import patch
 from io import StringIO
@@ -146,7 +147,7 @@ class TestHBNBCommand(unittest.TestCase):
             f.seek(0)
             self.console.onecmd(f"update User {user_id}")
             self.assertEqual(f.getvalue().strip(),
-                "** attribute name missing **")
+                             "** attribute name missing **")
 
     def test_update_missing_attr_value(self):
         with patch('sys.stdout', new=StringIO()) as f:
@@ -191,6 +192,7 @@ class TestHBNBCommand(unittest.TestCase):
             self.console.onecmd("User.count()")
             output = f.getvalue().strip()
             self.assertEqual(output, "1")
+
 
 if __name__ == '__main__':
     unittest.main()

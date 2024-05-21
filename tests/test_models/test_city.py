@@ -31,10 +31,12 @@ class TestCityDocs(unittest.TestCase):
         self.assertIsNot(City.__doc__, None,
                          "City class needs a docstring")
         self.assertTrue(len(City.__doc__) >= 1,
-                        "City class needs a docstring") 
+                        "City class needs a docstring")
+
 
 class TestCity(unittest.TestCase):
     """Test the City class"""
+
     def test_is_subclass(self):
         """Test that City is a subclass of BaseModel"""
         city = City()
@@ -44,7 +46,8 @@ class TestCity(unittest.TestCase):
         self.assertTrue(hasattr(city, "updated_at"))
 
     def test_state_id_attr(self):
-        """Test that City has attribute state_id, and it's as an empty string"""
+        """Test that City has attribute state_id,
+        and it's as an empty string"""
         city = City()
         self.assertTrue(hasattr(city, "state_id"))
         self.assertEqual(city.state_id, "")
@@ -80,4 +83,3 @@ class TestCity(unittest.TestCase):
         city = City()
         string = "[City] ({}) {}".format(city.id, city.__dict__)
         self.assertEqual(string, str(city))
-

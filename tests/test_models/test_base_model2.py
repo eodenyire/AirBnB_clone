@@ -3,6 +3,7 @@ from models.base_model import BaseModel
 from models import storage
 from datetime import datetime
 
+
 class TestBaseModel(unittest.TestCase):
     def test_create_base_model_from_dict(self):
         # Create a dictionary representation of a BaseModel instance
@@ -38,18 +39,19 @@ class TestBaseModel(unittest.TestCase):
 
         # Ensure that the storage variable is properly linked
         self.assertEqual(storage.all()["BaseModel." + my_model.id], my_model)
-        
+
         # Call the save method
         my_model.save()
 
         # Ensure that the save method of storage is called
         self.assertTrue(storage.all())
-        
+
         # Create a new BaseModel instance
         my_new_model = BaseModel()
-        
+
         # Ensure that new() method of storage is called for a new instance
         self.assertIn("BaseModel." + my_new_model.id, storage.all())
-        
+
+
 if __name__ == '__main__':
     unittest.main()

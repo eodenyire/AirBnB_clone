@@ -138,7 +138,7 @@ class TestHBNBCommand(unittest.TestCase):
     def test_update_missing_id(self):
         with patch('sys.stdout', new=StringIO()) as f:
             self.console.onecmd("update User")
-           
+
             self.assertEqual(f.getvalue().strip(), "** instance id missing **")
 
     def test_update_invalid_id(self):
@@ -151,7 +151,9 @@ class TestHBNBCommand(unittest.TestCase):
             self.console.onecmd("create User")
             user_id = f.getvalue().strip()
             self.console.onecmd(f"update User {user_id}")
-            self.assertEqual(f.getvalue().strip(), "** attribute name missing **")
+            self.assertEqual(
+                f.getvalue().strip(),
+                "** attribute name missing **")
 
     def test_update_missing_attr_value(self):
         with patch('sys.stdout', new=StringIO()) as f:
@@ -167,6 +169,7 @@ class TestHBNBCommand(unittest.TestCase):
             self.console.onecmd(f"update User {user_id} name 'John'")
             user = storage.all()["User." + user_id]
             self.assertEqual(user.name, "John")
+
 
 if __name__ == '__main__':
     unittest.main()

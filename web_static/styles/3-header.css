@@ -1,0 +1,18 @@
+/* styles/3-header.css */
+header {
+    height: 70px;
+    width: 100%;
+    border-bottom: 1px solid #CCCCCC;
+    display: flex;
+    align-items: center;
+    background-color: white;
+}
+
+header .logo {
+    width: 142px;
+    height: 60px;
+    background-image: url("../images/logo.png");
+    background-repeat: no-repeat;
+    background-position: 20px center;
+    padding-left: 20px;
+}

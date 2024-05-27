@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>AirBnb Clone</title>
     <link rel="stylesheet" href="styles/4-common.css">
@@ -9,89 +10,194 @@
     <link rel="stylesheet" href="styles/8-places.css">
     <link rel="icon" href="images/icon.png" type="image/png">
 </head>
+
 <body>
-<header>
-    <div class="logo"></div>
-</header>
-<div class="container">
-    <section class="filters">
-        <button type="button">Search</button>
-        <div class="locations">
-            <h3>States</h3>
-            <h4>California, Arizona...</h4>
-            <ul class="popover">
-                <li><h2>Arizona:</h2></li>
-                <li>
-                    <ul class="popover_list">
-                        <li>Page</li>
-                        <li>Page2</li>
-                    </ul>
-                </li>
-                <li><h2>California:</h2></li>
-                <li>
-                    <ul class="popover_list">
-                        <li>San Francisco</li>
-                        <li>Los Altos</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <div class="amenities">
-            <h3>Amenities</h3>
-            <h4>Internet, Kitchen...</h4>
-            <ul class="popover">
-                <li>Internet</li>
-                <li>TV</li>
-                <li>Kitchen</li>
-                <li>Iron</li>
-            </ul>
-        </div>
-    </section>
-    <section class="places">
-        <div class="place">
-            <h2>My Home</h2>
-            <div class="price_by_night">$80</div>
-            <div class="information">
-                <div class="max_guest"><img src="images/icon_group.png">2 Guests</div>
-                <div class="number_rooms"><img src="images/icon_bed.png">1 Bedroom</div>
-                <div class="number_bathrooms"><img src="images/icon_bath.png">1 Bathroom</div>
+    <header>
+        <div class="logo"></div>
+    </header>
+    <div class="container">
+        <section class="filters">
+            <button type="button">Search</button>
+            <div class="locations">
+                <h3>States</h3>
+                <h4>California, Arizona...</h4>
+                <ul class="popover">
+                    <li>
+                        <h2>Arizona:</h2>
+                    </li>
+                    <li>
+                        <ul class="popover_list">
+                            <li>Page</li>
+                            <li>Page2</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>California:</h2>
+                    </li>
+                    <li>
+                        <ul class="popover_list">
+                            <li>San Francisco</li>
+                            <li>Los Altos</li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-            <div class="user"><b>Owner:</b> John Lennon</div>
-            <div class="description">
-                This is a lovely 1 bedroom apartment that can accommodate 2 people. It is located in the center of Shanghai and next to subway line 1. Only 1 stop to People's Square, 2 stops to the Bund, and 3 stops to Jing'an Temple.
+            <div class="amenities">
+                <h3>Amenities</h3>
+                <h4>Internet, Kitchen...</h4>
+                <ul class="popover">
+                    <li>Internet</li>
+                    <li>TV</li>
+                    <li>Kitchen</li>
+                    <li>Iron</li>
+                </ul>
             </div>
-        </div>
-        <div class="place">
-            <h2>Tiny House</h2>
-            <div class="price_by_night">$65</div>
-            <div class="information">
-                <div class="max_guest"><img src="images/icon_group.png">4 Guests</div>
-                <div class="number_rooms"><img src="images/icon_bed.png">2 Bedrooms</div>
-                <div class="number_bathrooms"><img src="images/icon_bath.png">1 Bathroom</div>
+        </section>
+        <section class="places">
+            <div class="places_title">
+                <h1>Places</h1>
             </div>
-            <div class="user"><b>Owner:</b> Adriene</div>
-            <div class="description">
-                Our place is a private, affordable stand-alone guest house centrally located just minutes from the French Quarters, downtown, the Fair Grounds (Jazz Fest), and City Park. The guest house is a quaint 400 square ft. with a full bath, mini kitchen, and living room. The extra high ceilings make the home feel more spacious. The sofa converts to a bed as well. We have a hand-made counter area that adds character to the room and a great porch/deck to relax on and have a glass of wine.
+            <div class="articles">
+                <article>
+                    <div class="price_title">
+                        <div class="article_title">
+                            <h2>My Home</h2>
+                        </div>
+                        <div class="price_by_night">
+                            <div class="price">
+                                $80
+                            </div>
+                        </div>
+                    </div>
+                    <div class="information">
+                        <div class="max_guest">
+                            <div class="guest_icon">
+                            </div>
+                            <div class="guest_number">
+                                <h2>2 Guests</h2>
+                            </div>
+                        </div>
+                        <div class="number_rooms">
+                            <div class="rooms_icon">
+                            </div>
+                            <div class="rooms_number">
+                                <h2>1 Bedroom</h2>
+                            </div>
+                        </div>
+                        <div class="number_bathrooms">
+                            <div class="bathrooms_icon">
+                            </div>
+                            <div class="bathrooms_number">
+                                <h2>1 Bathroom</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user">
+                        <b>Owner:</b> John Lennon
+                    </div>
+                    <div class="description">
+                        This is a lovely 1 bedroom and 1 bathroom apartment that can
+                        accomodate 2 people. It locates at center of Shangai
+                        and next to subway line 1, 1 stop to People Square, 2 stops to
+                        Bund, 3 stops to Jingan Temple.
+                    </div>
+                </article>
+                <article>
+                    <div class="price_title">
+                        <div class="article_title">
+                            <h2>Tiny House</h2>
+                        </div>
+                        <div class="price_by_night">
+                            <div class="price">
+                                $80
+                            </div>
+                        </div>
+                    </div>
+                    <div class="information">
+                        <div class="max_guest">
+                            <div class="guest_icon">
+                            </div>
+                            <div class="guest_number">
+                                <h2>4 Guests</h2>
+                            </div>
+                        </div>
+                        <div class="number_rooms">
+                            <div class="rooms_icon">
+                            </div>
+                            <div class="rooms_number">
+                                <h2>2 Bedrooms</h2>
+                            </div>
+                        </div>
+                        <div class="number_bathrooms">
+                            <div class="bathrooms_icon">
+                            </div>
+                            <div class="bathrooms_number">
+                                <h2>1 Bathroom</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user">
+                        <b>Owner:</b> Adrienne
+                    </div>
+                    <div class="description">
+                        Our place is a private, affordable stand-alone guest house
+                        centrally located just minutes to French Quarters, downtown,
+                        The Fair Groundz(Jazz Fest) and City Park. The guest house is
+                        a quaint, 400 square ft. with a full bath, mini kitchen, & living
+                        room. The extra high cellings make the home feel more
+                        spacious. The sofa converts to a bed also. We have a hand
+                        made counter area that adds character to the room and a
+                        great porch/deck to relax on and have a glass of Merlot.
+
+                    </div>
+                </article>
+                <article>
+                    <div class="price_title">
+                        <div class="article_title">
+                            <h2>A Suite</h2>
+                        </div>
+                        <div class="price_by_night">
+                            <div class="price">
+                                $190
+                            </div>
+                        </div>
+                    </div>
+                    <div class="information">
+                        <div class="max_guest">
+                            <div class="guest_icon">
+                            </div>
+                            <div class="guest_number">
+                                <h2>2 Guests</h2>
+                            </div>
+                        </div>
+                        <div class="number_rooms">
+                            <div class="rooms_icon">
+                            </div>
+                            <div class="rooms_number">
+                                <h2>1 Bedroom</h2>
+                            </div>
+                        </div>
+                        <div class="number_bathrooms">
+                            <div class="bathrooms_icon">
+                            </div>
+                            <div class="bathrooms_number">
+                                <h2>1 Bathroom</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user">
+                        <b>Owner:</b> Bill Zuckerberg
+                    </div>
+                    <div class="description">
+                        Newly renovated spacious 2 bedrooms 2 baths in cozy Gastown style unit with the views of North Shore mountains. Woodward's landmark building situated at the historic heart of Vancouver.
+                    </div>
+                </article>
             </div>
-        </div>
-        <div class="place">
-            <h2>A Suite</h2>
-            <div class="price_by_night">$190</div>
-            <div class="information">
-                <!-- Fake icons and texts -->
-                <div class="max_guest"><img src="images/icon_group.png">3 Guests</div>
-                <div class="number_rooms"><img src="images/icon_bed.png">2 Bedrooms</div>
-                <div class="number_bathrooms"><img src="images/icon_bath.png">2 Bathrooms</div>
-            </div>
-            <div class="user"><b>Owner:</b> [Fake text]</div>
-            <div class="description">
-                [Fake description]
-            </div>
-        </div>
-    </section>
-</div>
-<footer>
-    Best School
-</footer>
+        </section>
+    </div>
+    <footer>
+        Best School
+    </footer>
 </body>
+
 </html>

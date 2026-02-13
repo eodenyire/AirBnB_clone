@@ -169,7 +169,7 @@ class HBNBCommand(cmd.Cmd):
                     return
             else:
                 attr_name = args[2]
-                attr_value = args[3].strip('"')
+                attr_value = args[3].strip('"').strip("'")
                 if attr_name in ('id', 'created_at', 'updated_at'):
                     print(f"** can not update attribute: {attr_name} **")
                     return

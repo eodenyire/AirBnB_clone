@@ -150,6 +150,7 @@ class TestHBNBCommand(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             self.console.onecmd("create User")
             user_id = f.getvalue().strip()
+        with patch('sys.stdout', new=StringIO()) as f:
             self.console.onecmd(f"update User {user_id}")
             self.assertEqual(
                 f.getvalue().strip(),
@@ -159,6 +160,7 @@ class TestHBNBCommand(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             self.console.onecmd("create User")
             user_id = f.getvalue().strip()
+        with patch('sys.stdout', new=StringIO()) as f:
             self.console.onecmd(f"update User {user_id} name")
             self.assertEqual(f.getvalue().strip(), "** value missing **")
 

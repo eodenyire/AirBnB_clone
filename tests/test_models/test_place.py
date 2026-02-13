@@ -7,7 +7,11 @@ from datetime import datetime
 import inspect
 from models import place
 from models.base_model import BaseModel
-import pycodestyle
+try:
+    import pycodestyle
+    HAS_PYCODESTYLE = True
+except ImportError:
+    HAS_PYCODESTYLE = False
 import unittest
 Place = place.Place
 
@@ -19,6 +23,7 @@ class TestPlaceDocs(unittest.TestCase):
         """Set up for the doc tests"""
         cls.place_f = inspect.getmembers(Place, inspect.isfunction)
 
+    @unittest.skipUnless(HAS_PYCODESTYLE, "pycodestyle not installed")
     def test_pep8_conformance_place(self):
         """Test that models/place.py conforms to PEP8."""
         pep8s = pycodestyle.StyleGuide(quiet=True)

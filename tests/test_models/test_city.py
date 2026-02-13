@@ -7,7 +7,11 @@ from datetime import datetime
 import inspect
 from models import city
 from models.base_model import BaseModel
-import pycodestyle
+try:
+    import pycodestyle
+    HAS_PYCODESTYLE = True
+except ImportError:
+    HAS_PYCODESTYLE = False
 import unittest
 City = city.City
 
@@ -19,6 +23,7 @@ class TestCityDocs(unittest.TestCase):
         """Set up for the doc tests"""
         cls.city_f = inspect.getmembers(City, inspect.isfunction)
 
+    @unittest.skipUnless(HAS_PYCODESTYLE, "pycodestyle not installed")
     def test_pep8_conformance_city(self):
         """Test that models/city.py conforms to PEP8."""
         pep8s = pycodestyle.StyleGuide(quiet=True)

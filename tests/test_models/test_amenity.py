@@ -7,7 +7,11 @@ from datetime import datetime
 import inspect
 from models import amenity
 from models.base_model import BaseModel
-import pycodestyle
+try:
+    import pycodestyle
+    HAS_PYCODESTYLE = True
+except ImportError:
+    HAS_PYCODESTYLE = False
 import unittest
 Amenity = amenity.Amenity
 
@@ -19,6 +23,7 @@ class TestAmenityDocs(unittest.TestCase):
         """Set up for the doc tests"""
         cls.amenity_f = inspect.getmembers(Amenity, inspect.isfunction)
 
+    @unittest.skipUnless(HAS_PYCODESTYLE, "pycodestyle not installed")
     def test_pep8_conformance_amenity(self):
         """Test that models/amenity.py conforms to pycodestyle."""
         style = pycodestyle.StyleGuide(quiet=True)

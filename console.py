@@ -169,7 +169,11 @@ class HBNBCommand(cmd.Cmd):
                     return
             else:
                 attr_name = args[2]
-                attr_value = args[3].strip('"')
+                attr_value = args[3]
+                # Remove matching outer quotes (either single or double)
+                if (attr_value.startswith('"') and attr_value.endswith('"')) or \
+                   (attr_value.startswith("'") and attr_value.endswith("'")):
+                    attr_value = attr_value[1:-1]
                 if attr_name in ('id', 'created_at', 'updated_at'):
                     print(f"** can not update attribute: {attr_name} **")
                     return
